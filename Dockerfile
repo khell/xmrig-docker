@@ -17,7 +17,7 @@ WORKDIR /app/xmrig
 
 # Adjust donation level
 RUN sed -i "s/kDefaultDonateLevel = 5/kDefaultDonateLevel = ${DONATE_LEVEL}/g" src/donate.h
-RUN sed -i "s/kMinimumDonateLevel = 5/kMinimumDonateLevel = 0/g" src/donate.h
+RUN sed -i "s/kMinimumDonateLevel = 1/kMinimumDonateLevel = 0/g" src/donate.h
 
 RUN mkdir build
 WORKDIR /app/xmrig/build
