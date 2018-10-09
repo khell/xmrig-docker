@@ -17,7 +17,7 @@ WORKDIR /app/xmrig
 RUN git checkout $GIT_TAG
 
 # Adjust donation level
-RUN sed -i "s/kDonateLevel = 5/kDonateLevel = ${DONATE_LEVEL}/g" src/donate.h
+RUN sed -i -r "s/k([[:alpha:]]*)DonateLevel = [[:digit:]]/k\1DonateLevel = ${DONATE_LEVEL}/g" src/donate.h
 
 RUN mkdir build
 WORKDIR /app/xmrig/build
