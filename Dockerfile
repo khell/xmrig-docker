@@ -1,19 +1,20 @@
 FROM ubuntu:16.04
 
 ARG DONATE_LEVEL=5
+ARG GIT_TAG
 
 WORKDIR /app
 USER root
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common python-software-properties
-
 RUN add-apt-repository -y ppa:jonathonf/gcc-7.1
 RUN apt-get update
 RUN apt-get install -y gcc-7 g++-7 git build-essential cmake libuv1-dev libmicrohttpd-dev
 
 RUN git clone https://github.com/xmrig/xmrig.git
 WORKDIR /app/xmrig
+RUN git checkout $GIT_TAG
 
 # Adjust donation level
 RUN sed -i "s/kDonateLevel = 5/kDonateLevel = ${DONATE_LEVEL}/g" src/donate.h
